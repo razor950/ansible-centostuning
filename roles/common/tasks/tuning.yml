@@ -1,0 +1,29 @@
+---
+- block: # Performance Tuning (sysctl & limits)
+  - name: Configure security limits
+    lineinfile:
+      dest: /etc/security/limits.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items: "{{ host_limits_vars }}"
+    when: host_is_tuning
+    register: host_configuring_security_limits
+
+  - name: Configure sysctl.conf
+    lineinfile:
+      dest: /etc/sysctl.conf
+      state: present
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items: "{{ host_sysctl_vars }}"
+    when: host_is_tuning
+    register: host_configuring_sysctl
+
+  - name: Checks if server(s) need to reboot
+    set_fact:
+      host_need_reboot: true
+    when: |
+      host_configuring_security_limits.changed
+      or host_configuring_sysctl.changed
+  tags:
+    - host-tuning

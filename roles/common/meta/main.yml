@@ -1,0 +1,17 @@
+galaxy_info:
+  author: razor950
+  description: Ansible role to prepare and tune the CentOS host(s).
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+  - name: CentOS
+    versions:
+    - all
+  galaxy_tags:
+    - system
+    - ntp
+    - hostname
+    - tuning
+    - user
+    - update
+dependencies: []
