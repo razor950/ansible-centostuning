@@ -4,7 +4,7 @@ host_role_name: host_prepare_tuning
 host_need_reboot: false
 host_reboot_timeout: 600
 
-host_is_tuning: false
+host_is_tuning: true
 host_sysctl_vars:
   - { regexp: '^fs\.file-max \= ', line: 'fs.file-max = 1000000' } # max number of open files (sockets are files they provide bytes via read/write interface)
   - { regexp: '^net\.ipv4\.tcp_tw_reuse \= ', line: 'net.ipv4.tcp_tw_reuse = 1' } #  reuse and recycle TIME_WAIT sockets
